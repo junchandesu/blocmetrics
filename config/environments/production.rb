@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   #  # Define the default url option, appropriate for a development environment
-  config.action_mailer.default_url_options = { https://junko-blocmetrics.herokuapp.com/ }
+  config.action_mailer.default_url_options = { host: 'https://junko-blocmetrics.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
 
