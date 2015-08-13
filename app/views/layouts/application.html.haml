@@ -10,10 +10,10 @@
  %body
   %container
    %ul.nav.nav-tabs
-    %li=link_to "Home Blocmetrics", root_path
+    %li= link_to "Home Blocmetrics", root_path
     .pull-right
      - if current_user
-      = current_user.name || current_user.email
+      = link_to "#{current_user.name || current_user.email}", registered_applications_path
       is signed in now.
       = link_to "Sign out", destroy_user_session_path, method: :delete
      - else

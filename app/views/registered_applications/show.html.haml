@@ -1,0 +1,7 @@
+%h1
+ = @app.name
+%h3
+ = link_to @app.url, @app.url, :target => '_blank'
+ %h4
+  = link_to "Edit", edit_registered_application_path(@app), class: 'btn btn-info' 
+  = link_to "Delete", registered_application_path(@app), class: 'btn btn-warning', method: :delete, data: { comfirm: 'Area you sure you would like to delte #{@app.url}'}

@@ -1,0 +1,11 @@
+.row
+ .col-md-10
+  %h1
+   = current_user.name
+   's Registerd Application List
+  .ul.list-group
+   = render partial: 'apps', collection: @apps 
+
+  %button.btn.btn-info
+   = link_to "Register a new app info.", new_registered_application_path
+   .span.glyphicon.glyphicon-pushpin
