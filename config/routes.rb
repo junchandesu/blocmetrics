@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
  
-  get 'jobs/index'
-
-  get 'jobs/new'
-
-  get 'jobs/show'
-
-  get 'jobs/edit'
-
   devise_for :users
   root to: 'welcome#index'
 
-  resources :registered_applications do
-    resources :jobs, only: [:create, :new]
+  resources :registered_applications 
+
+  namespace :api, defaults: { format: :json } do
+    match 'create_job', to: 'jobs#create', via: [:options]
+    resources :jobs, only: [:create] 
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
