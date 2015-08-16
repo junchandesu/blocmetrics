@@ -1,5 +1,8 @@
 class RegisteredApplication < ActiveRecord::Base
   belongs_to :user
-  validates :name, uniqueness: true, presence: true
-  validates :url, uniqueness: true, presence: true
+   has_many :jobs
+  validates :name, presence: true
+  validates :url, presence: true
 end
+
+

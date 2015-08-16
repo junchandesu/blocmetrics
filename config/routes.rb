@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
  
+  get 'jobs/index'
+
+  get 'jobs/new'
+
+  get 'jobs/show'
+
+  get 'jobs/edit'
+
   devise_for :users
   root to: 'welcome#index'
 
-  resources :registered_applications
+  resources :registered_applications do
+    resources :jobs, only: [:create, :new]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
