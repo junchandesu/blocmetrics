@@ -1,10 +1,13 @@
 class RegisteredApplicationsController < ApplicationController
+  before_action :set_app, only: [:show, :edit, :update, :destroy]
+
   def index
   	@apps = RegisteredApplication.all
   end
 
   def show
-  	@app = current_user.registered_applications.find(params[:id])
+    @job_count = @app.jobs.count
+    @jobs = @app.jobs.group_by(&:name)
   end
 
   def new
@@ -23,12 +26,11 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def edit
-  	@app = current_user.registered_applications.find(params[:id])
+
   end
 
 
   def update
-  	@app = current_user.registered_applications.find(params[:id])
   	if @app.update_attributes(params_app)
   		redirect_to @app, notice: "Application is updated."
   	else
@@ -37,7 +39,6 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def destroy
-  	@app = RegisteredApplication.find(params[:id])
   	if @app.destroy
   		redirect_to @app, notice: "#{@app.url} was deleted."
   	else
@@ -49,5 +50,9 @@ class RegisteredApplicationsController < ApplicationController
 
   def params_app
   	params.require(:registered_application).permit(:name, :url)
+  end
+
+  def set_app
+    @app = RegisteredApplication.find(params[:id])
   end
 end

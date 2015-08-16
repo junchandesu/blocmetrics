@@ -35,6 +35,9 @@ gem 'devise', '~> 3.5.1'
 # take care of the sensitive info
 gem 'figaro', '~> 1.1.1'
 
+# create samples of collections on models
+gem 'faker', '~> 1.4.3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
