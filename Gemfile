@@ -38,6 +38,12 @@ gem 'figaro', '~> 1.1.1'
 # create samples of collections on models
 gem 'faker', '~> 1.4.3'
 
+# graph creater
+gem "chartkick"
+
+# a line chart of events over time
+gem 'groupdate'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

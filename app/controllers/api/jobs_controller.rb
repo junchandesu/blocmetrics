@@ -1,7 +1,8 @@
 class API::JobsController < ApplicationController
-	skip_before_action :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
 	before_filter :set_access_control_headers
 
+	
  
 
 	def create
@@ -9,7 +10,7 @@ class API::JobsController < ApplicationController
    	    if registered_application.nil
 			render json: "Unregistered application", status: :unprocessable_entity
 	    else
-	    	@job = job_params
+	    	@job =  registered_application.jobs.builld(job_params)
 	    	if @job.save
 	    		 render json: @job, status: :created
 	    	else
@@ -19,13 +20,16 @@ class API::JobsController < ApplicationController
 	end
 
 	private
+
 	def job_params
-		params.permit(:job_name)
+		params.permit(:name)
 	end
 
-	 def set_access_control_headers
-     headers['Access-Control-Allow-Origin'] = '*'
-     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-     headers['Access-Control-Allow-Headers'] = 'Content-Type'
-   end
+	def set_access_control_headers
+     	headers['Access-Control-Allow-Origin'] = '*'
+     	headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+     	headers['Access-Control-Allow-Headers'] = 'Content-Type'
+   	end
+
+	
 end
