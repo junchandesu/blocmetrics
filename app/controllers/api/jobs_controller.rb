@@ -6,10 +6,10 @@ class API::JobsController < ApplicationController
 
 	def create
 		registered_application = RegisteredApplication.find_by(url: request.env['HTTP_ORIGIN'])
-   	    if registered_application.nil
+   	    if registered_application.nil?
 			render json: "Unregistered application", status: :unprocessable_entity
 	    else
-	    	@job = job_params
+	    	@job = registered_application.jobs.build(job_params)
 	    	if @job.save
 	    		 render json: @job, status: :created
 	    	else
@@ -20,7 +20,7 @@ class API::JobsController < ApplicationController
 
 	private
 	def job_params
-		params.permit(:job_name)
+		params.require(:job).permit(:name)
 	end
 
 	 def set_access_control_headers
