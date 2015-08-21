@@ -4,15 +4,30 @@
    = @app.name
   %h3
    = link_to @app.url, @app.url, :target => '_blank'
-   %h4
-    = link_to "Edit", edit_registered_application_path(@app), class: 'btn btn-info' 
-    = link_to "Delete", registered_application_path(@app), class: 'btn btn-warning', method: :delete, data: { comfirm: 'Area you sure you would like to delte #{@app.url}'}
-   %i
-    %b
-     %p
-      There are 
-      = pluralize(@job_count, "job")
-      as below.
+  %h4
+   = link_to "Edit", edit_registered_application_path(@app), class: 'btn btn-info' 
+   = link_to "Delete", registered_application_path(@app), class: 'btn btn-warning', method: :delete, data: { comfirm: 'Area you sure you would like to delte #{@app.url}'}
+   
+  %i
+   %b
+    %p
+     There are 
+     = pluralize(@job_count, "job")
+     as below.
   = render partial: "jobs/jobs", collection: @app.jobs, as: :job
+  %h3
+   Bar Chart :Number of each job accessed
+  %h5
+   = pie_chart @app.jobs.group(:name).count 
+  %h3
+   Line Chart by the time of event created 
+  = line_chart @app.jobs.group(:created_at).count 
+
+  
+
   %i
    = link_to "Back", :back
+%script
+ var Chartkick = {"language": "de"};
+
+  
